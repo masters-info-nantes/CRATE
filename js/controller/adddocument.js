@@ -107,6 +107,15 @@ AddDocument.prototype.justDoIt = function(signalingOptions,
         cell.remove();
         button.remove();
     });
+
+    $.fn.openLink = function(link) {
+        self.justDoIt({server:  'https://ancient-shelf-9067.herokuapp.com',
+                       session: link.currentTarget.href.split('?')[1],
+                       connect: true});
+
+        return false;
+    };
+
     // #3C add save button
     var saveDiv = jQuery('<div>')
         .css('display', 'inline-block')
