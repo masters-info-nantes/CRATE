@@ -7,6 +7,8 @@ function AddDocument(viewAction, viewModal, viewDocuments){
     this.viewModal = viewModal;
     this.viewDocuments = viewDocuments;
 
+    var lienOuvert = [];
+
     // #1 bind the add button to its action
     viewAction.button.unbind('click');
     viewAction.button.css('box-shadow', "0 0 0px #ffffff");
@@ -109,9 +111,27 @@ AddDocument.prototype.justDoIt = function(signalingOptions,
     });
 
     $.fn.openLink = function(link) {
-        self.justDoIt({server:  'https://ancient-shelf-9067.herokuapp.com',
-                       session: link.currentTarget.href.split('?')[1],
-                       connect: true});
+
+     var index;
+
+        for (index = 0; index < lienOuvert.length; index++) {
+            if(lienOuvert[index] == link.currentTarget.href){
+               break;
+            }
+        }
+
+        if(index == lienOuvert.length){
+            lienOuvert.push(link.currentTarget.href);
+
+            self.justDoIt({
+               server:  'https://ancient-shelf-9067.herokuapp.com',
+               session: link.currentTarget.href.split('?')[1],
+               connect: true
+           });
+        } 
+        else {
+            alert("Le document deja ouvert !!");
+        }
 
         return false;
     };
