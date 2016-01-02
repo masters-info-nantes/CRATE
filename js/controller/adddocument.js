@@ -7,7 +7,7 @@ function AddDocument(viewAction, viewModal, viewDocuments){
     this.viewModal = viewModal;
     this.viewDocuments = viewDocuments;
 
-    var lienOuvert = [];
+    this.lienOuvert = [];
 
     // #1 bind the add button to its action
     viewAction.button.unbind('click');
@@ -111,17 +111,15 @@ AddDocument.prototype.justDoIt = function(signalingOptions,
     });
 
     $.fn.openLink = function(link) {
-
-     var index;
-
-        for (index = 0; index < lienOuvert.length; index++) {
-            if(lienOuvert[index] == link.currentTarget.href){
+        var index;
+        for (index = 0; index < self.lienOuvert.length; index++) {
+            if(self.lienOuvert[index] == link.currentTarget.href){
                break;
             }
         }
 
-        if(index == lienOuvert.length){
-            lienOuvert.push(link.currentTarget.href);
+        if(index == self.lienOuvert.length){
+            self.lienOuvert.push(link.currentTarget.href);
 
             self.justDoIt({
                server:  'https://ancient-shelf-9067.herokuapp.com',
